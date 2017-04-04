@@ -498,7 +498,6 @@ function next() {
 
 }
 
-
 function update() {
     var url, username, telephone, password, cpassword, obj, bool;
 
@@ -551,5 +550,30 @@ function update() {
     } else {
         $("#efailpopup2").popup("open", {transition: "slide"});
     }
+}
+
+//test code or UI demo
+function toprofile() {
+    change_page('#profilepage', '');
+}
+
+function toann() {
+    change_page('#announcementpage', '');
+}
+
+function toapp() {
+    change_page('#appointmentpage', '');
+}
+
+function toacc() {
+    change_page('#activitiespage', '');
+}
+
+function toser() {
+    change_page('#messagespage', '');
+}
+
+function todash() {
+    change_page('#dashboard', '');
 }
 

@@ -49,15 +49,15 @@
             <!--<i class=""></i>-->
         </a>
     </div>
-    <!---->
+
     <div data-role="popup" id="loginfailpopup" class="ui-content" style="background-color: white; border: none">
         <h4 style="color: crimson">Wrong username or password.</h4>
     </div>
-    <!---->
+
     <div data-role="popup" id="loginfailpopup2" class="ui-content" style="background-color: white; border: none">
         <h4 style="color: crimson">Please fill out all fields !</h4>
     </div>
-    <!---->
+
     <div data-role="content">
         <!---->
         <div class="align-center">
@@ -116,13 +116,12 @@
             <br>
             <!---->
             <div>
-                <a data-role="button" id="loginbutton" style="background-color: #4CAF50;color: #fff"
-                   href="#dashboard">Login</a>
+                <a data-role="button" id="loginbutton" style="background-color: #4CAF50;color: #fff" onclick="login()">Login</a>
             </div>
             <!---->
-            <div class="align-center">
-                <h5>Sign up <a href="#signuppage" data-transition="slide" style="color: #4CAF50">here !</a></h5>
-            </div>
+            <!--<div class="align-center">-->
+            <!--<h5>Sign up <a href="#signuppage" data-transition="slide" style="color: #4CAF50">here !</a></h5>-->
+            <!--</div>-->
         </div>
     </div>
 </div>
@@ -205,7 +204,7 @@
          data-position='bottom' data-display="overlay">
 
         <div class="row">
-            <div class="col-xs-4" onclick="toprofile()">
+            <div class="col-xs-4" onclick="get_profile_data()">
                 <div class="align-center">
                     <br>
                     <br>
@@ -370,172 +369,272 @@
         <div>
             <input type="text" id="pusername" placeholder="Username" readonly style="text-align: center">
         </div>
-        <!---->
+
         <div>
-            <input type="number" id="ptel" placeholder="Telephone" readonly style="text-align: center">
+            <input type="text" id="pfname" placeholder="Firstname" readonly style="text-align: center">
+        </div>
+
+        <div>
+            <input type="text" id="pmname" placeholder="Middlename" readonly style="text-align: center">
+        </div>
+
+        <div>
+            <input type="text" id="plname" placeholder="Lastname" readonly style="text-align: center">
         </div>
 
         <div>
             <input type="email" id="pemail" placeholder="Email" readonly style="text-align: center">
         </div>
-        <!---->
+
         <div>
-            <input type="password" id="ppassword" placeholder="Location" readonly style="text-align: center">
+            <input type="tel" id="ptelephone" placeholder="Telephone" readonly style="text-align: center">
         </div>
 
         <label class="align-center" style="font-size: 14px">Group</label>
 
-        <div data-role="collapsible" data-icon="true" style="background-color: gainsboro">
+        <div data-role="collapsible" class="" data-icon="true" style="background-color: gainsboro">
             <h4 class="align-left" style="opacity: 0;">dsdl</h4>
-            <p class="align-center">Usher</p>
-            <p class="align-center">Treasurer</p>
+            <div data-role="content" id="pgroups">
+                <!--<p class="align-center">Uswher</p>-->
+                <!--<p class="align-center">Treasurer</p>-->
+            </div>
         </div>
 
-        <div>
-            <input type="text" id="" placeholder="Status" readonly style="text-align: center">
-        </div>
-    </div>
-
-    <div data-role="footer" data-position="fixed" style="border: none; background-color: #fff">
-        <div class="row">
-            <div class="col-xs-6"></div>
-            <div class="col-xs-6">
-                <div class="align-right">
-                    <a href="#editpage" data-role="button" style="background-color: #4CAF50"
-                       class="ui-btn">
-                        <i style="color: #ffffff; font-size: 20px;" class="zmdi zmdi-edit zmd-2x"></i>
-                    </a>
+        <div data-role="footer" data-position="fixed" style="border: none; background-color: #fff">
+            <div class="row">
+                <div class="col-xs-6"></div>
+                <div class="col-xs-6">
+                    <div class="align-right">
+                        <a onclick="get_edit_info()" data-role="button" style="background-color: #4CAF50"
+                           class="ui-btn">
+                            <i style="color: #ffffff; font-size: 20px;" class="zmdi zmdi-edit zmd-2x"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--edit page-->
-<div data-role="page" id="editpage">
+    <!--edit page-->
+    <div data-role="page" id="editpage">
 
-    <div data-role="header" style="background-color: #4CAF50"
-         class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
-        <h1 style="color: #ffffff; opacity: 0;" class="align-center"><b>Panels</b></h1>
-        <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-menu"></i>
-        </a>
+        <div data-role="header" style="background-color: #4CAF50"
+             class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
+            <h1 style="color: #ffffff; opacity: 0;" class="align-center"><b>Panels</b></h1>
+            <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-menu"></i>
+            </a>
 
-        <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-home" data-transition="flip"></i>
-        </a>
+            <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-home" data-transition="flip"></i>
+            </a>
 
-    </div>
-
-    <br>
-    <br>
-    <br>
-    <br>
-
-
-    <div data-role="popup" id="esuccesspopup" class="ui-content" style="background-color: white; border: none">
-        <h4 style="color: #4CAF50">Update successful !</h4>
-    </div>
-
-    <div data-role="popup" id="efailpopup" class="ui-content" style="background-color: white; border: none">
-        <h4 style="color: crimson">Update Failed</h4>
-    </div>
-
-    <div data-role="popup" id="efailpopup2" class="ui-content" style="background-color: white; border: none">
-        <h4 style="color: crimson">Please fill out all empty fields !</h4>
-    </div>
-
-    <div data-role="popup" id="efailpopup3" class="ui-content" style="background-color: white; border: none">
-        <h4 style="color: crimson">Invalid telephone number !</h4>
-    </div>
-
-    <div data-role="popup" id="efailpopup4" class="ui-content" style="background-color: white; border: none">
-        <h4 style="color: crimson">Passwords do not match !</h4>
-    </div>
-
-    <div data-role="popup" id="efailpopup5" class="ui-content" style="background-color: white; border: none">
-        <h4 style="color: crimson">Your password should be at least 8 characters long !</h4>
-    </div>
-
-    <div data-role="content">
-        <!--name-->
-        <div>
-            <input type="text" id="eusername" placeholder="Username" required style="text-align: center">
-        </div>
-
-        <div>
-            <input type="number" id="etel" placeholder="Telephone" required style="text-align: center">
-        </div>
-
-        <div>
-            <input type="password" id="epassword" placeholder="Password" required style="text-align: center">
-        </div>
-
-        <div>
-            <input type="password" id="ecpassword" placeholder="Confirm Password" required
-                   style="text-align: center">
         </div>
 
         <br>
         <br>
-        <div>
-            <a style="background-color: #4CAF50;color: #fff" data-role="button" id="updatebutton"
-               onclick="update()">Update</a>
+        <br>
+        <br>
+
+
+        <div data-role="popup" id="esuccesspopup" class="ui-content" style="background-color: white; border: none">
+            <h4 style="color: #4CAF50">Update successful !</h4>
+        </div>
+
+        <div data-role="popup" id="efailpopup" class="ui-content" style="background-color: white; border: none">
+            <h4 style="color: crimson">Update Failed</h4>
+        </div>
+
+        <div data-role="popup" id="efailpopup2" class="ui-content" style="background-color: white; border: none">
+            <h4 style="color: crimson">Please fill out all empty fields !</h4>
+        </div>
+
+        <div data-role="popup" id="efailpopup3" class="ui-content" style="background-color: white; border: none">
+            <h4 style="color: crimson">Invalid telephone number !</h4>
+        </div>
+
+        <div data-role="popup" id="efailpopup4" class="ui-content" style="background-color: white; border: none">
+            <h4 style="color: crimson">Passwords do not match !</h4>
+        </div>
+
+        <div data-role="popup" id="efailpopup5" class="ui-content" style="background-color: white; border: none">
+            <h4 style="color: crimson">Your password should be at least 8 characters long !</h4>
+        </div>
+
+        <div data-role="content">
+
+            <!--name-->
+            <div>
+                <input type="text" id="eusername" placeholder="Username" required style="text-align: center">
+            </div>
+
+            <div>
+                <input type="text" id="efname" placeholder="Firstname" required style="text-align: center">
+            </div>
+
+            <div>
+                <input type="text" id="emname" placeholder="Middlename" required style="text-align: center">
+            </div>
+
+            <div>
+                <input type="text" id="elname" placeholder="Lastname" required style="text-align: center">
+            </div>
+
+            <div>
+                <input type="email" id="eemail" placeholder="Email" required style="text-align: center">
+            </div>
+
+            <div>
+                <input type="tel" id="etelephone" placeholder="Telephone" required style="text-align: center">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <p style="opacity: 0">jadbaksdjsasadawd</p>
+                </div>
+
+                <div class="col-sm-4">
+                    <div>
+                        <fieldset data-role="controlgroup" id="groups">
+                            <legend>Groups</legend>
+                            <input type="checkbox" name="checkbox-1a" id="checkbox-1ab" checked="">
+                            <label for="checkbox-1ab">Cheetos</label>
+                            <input type="checkbox" name="checkbox-2a" id="checkbox-2ab">
+                            <label for="checkbox-2ab">Doritos</label>
+                            <input type="checkbox" name="checkbox-3a" id="checkbox-3ab">
+                            <label for="checkbox-3ab">Fritos</label>
+                            <input type="checkbox" name="checkbox-4a" id="checkbox-4ab">
+                            <label for="checkbox-4ab">Sun Chips</label>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <div>
+                <a style="background-color: #4CAF50;color: #fff" data-role="button" id="updatebutton"
+                   onclick="update()">Update</a>
+            </div>
         </div>
     </div>
-</div>
 
-<!--announcement page-->
-<div data-role="page" id="announcementpage">
+    <!--announcement page-->
+    <div data-role="page" id="announcementpage">
 
-    <div data-role="header" style="background-color: #4CAF50"
-         class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
-        <h1 style="color: #ffffff; opacity: 0;" class="align-center"><b>Panels</b></h1>
-        <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-menu"></i>
-        </a>
+        <div data-role="header" style="background-color: #4CAF50"
+             class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
+            <h1 style="color: #ffffff; opacity: 0;" class="align-center"><b>Panels</b></h1>
+            <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-menu"></i>
+            </a>
 
-        <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-home" data-transition="flip"></i>
-        </a>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
+            <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-home" data-transition="flip"></i>
+            </a>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
 
-    <div id="ann" data-role="content">
-        <div class='nd2-card'>
-            <div class='card-title'>
-                <h4 class='card-primary-title' style='color: #4CAF50;'>Fundraising</h4>
-                <!--<h5>From " + +" to " + +"</h5>-->
-                <div class='card-action'>
-                    <div class='row between-xs'>
-                        <div class='col-xs-12 align-right'>
-                            <div class='box'>
-                                <a href='#'
-                                   class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
-                                   onclick='get_an_info(" + obj.announcements[i].id + ")'><i style='color: #4CAF50'
-                                                                                             class='zmdi zmdi-mail-reply zmd-flip-horizontal'></i></a>
+        <div id="ann" data-role="content">
+            <div class='nd2-card'>
+                <div class='card-title'>
+                    <h4 class='card-primary-title' style='color: #4CAF50;'>Fundraising</h4>
+                    <!--<h5>From " + +" to " + +"</h5>-->
+                    <div class='card-action'>
+                        <div class='row between-xs'>
+                            <div class='col-xs-12 align-right'>
+                                <div class='box'>
+                                    <a href='#'
+                                       class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
+                                       onclick='get_an_info(" + obj.announcements[i].id + ")'><i style='color: #4CAF50'
+                                                                                                 class='zmdi zmdi-mail-reply zmd-flip-horizontal'></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='nd2-card'>
+                <div class='card-title'>
+                    <h4 class='card-primary-title' style='color: #4CAF50;'>Kofi and Ama</h4>
+                    <!--<h5>From " + +" to " + +"</h5>-->
+                    <div class='card-action'>
+                        <div class='row between-xs'>
+                            <div class='col-xs-12 align-right'>
+                                <div class='box'>
+                                    <a href='#'
+                                       class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
+                                       onclick='get_an_info(" + obj.announcements[i].id + ")'><i style='color: #4CAF50'
+                                                                                                 class='zmdi zmdi-mail-reply zmd-flip-horizontal'></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class='nd2-card'>
-            <div class='card-title'>
-                <h4 class='card-primary-title' style='color: #4CAF50;'>Kofi and Ama</h4>
-                <!--<h5>From " + +" to " + +"</h5>-->
-                <div class='card-action'>
-                    <div class='row between-xs'>
-                        <div class='col-xs-12 align-right'>
-                            <div class='box'>
-                                <a href='#'
-                                   class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
-                                   onclick='get_an_info(" + obj.announcements[i].id + ")'><i style='color: #4CAF50'
-                                                                                             class='zmdi zmdi-mail-reply zmd-flip-horizontal'></i></a>
+    <!--activities page-->
+    <div data-role="page" id="activitiespage">
+
+        <div data-role="header" style="background-color: #4CAF50"
+             class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
+            <h1 style="color: #ffffff; opacity: 0" class="align-center"><b>Panels</b></h1>
+            <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-menu"></i>
+            </a>
+
+            <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-home" data-transition="flip"></i>
+            </a>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div id="acc" data-role="content">
+            <div class='nd2-card'>
+                <div class='card-title'>
+                    <h4 class='card-primary-title' style='color: #4CAF50;'>Health Walk</h4>
+                    <!--<h5>From " + +" to " + +"</h5>-->
+                    <div class='card-action'>
+                        <div class='row between-xs'>
+                            <div class='col-xs-12 align-right'>
+                                <div class='box'>
+                                    <a href='#'
+                                       class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
+                                       onclick='get_an_info(" + obj.announcements[i].id + ")'><i style='color: #4CAF50'
+                                                                                                 class='zmdi zmdi-mail-reply zmd-flip-horizontal'></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='nd2-card'>
+                <div class='card-title'>
+                    <h4 class='card-primary-title' style='color: #4CAF50;'>Soul Winning</h4>
+                    <!--<h5>From " + +" to " + +"</h5>-->
+                    <div class='card-action'>
+                        <div class='row between-xs'>
+                            <div class='col-xs-12 align-right'>
+                                <div class='box'>
+                                    <a href='#'
+                                       class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
+                                       onclick='get_an_info(" + obj.announcements[i].id + ")'><i style='color: #4CAF50'
+                                                                                                 class='zmdi zmdi-mail-reply zmd-flip-horizontal'></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -543,290 +642,230 @@
             </div>
         </div>
     </div>
-</div>
 
-<!--activities page-->
-<div data-role="page" id="activitiespage">
+    <!--announcement info page-->
+    <div data-role="page" id="ainfopage">
 
-    <div data-role="header" style="background-color: #4CAF50"
-         class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
-        <h1 style="color: #ffffff; opacity: 0" class="align-center"><b>Panels</b></h1>
-        <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-menu"></i>
-        </a>
+        <div data-role="header" style="background-color: #4CAF50"
+             class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
+            <h1 style="color: #ffffff; opacity: 0" class="align-center"><b>Panels</b></h1>
+            <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-menu"></i>
+            </a>
 
-        <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-home" data-transition="flip"></i>
-        </a>
+            <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-home" data-transition="flip"></i>
+            </a>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div id="aninfo" data-role="content">
+
+        </div>
     </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
+    <!--activity info-->
+    <div data-role="page" id="acinfopage">
 
-    <div id="acc" data-role="content">
-        <div class='nd2-card'>
-            <div class='card-title'>
-                <h4 class='card-primary-title' style='color: #4CAF50;'>Health Walk</h4>
-                <!--<h5>From " + +" to " + +"</h5>-->
-                <div class='card-action'>
-                    <div class='row between-xs'>
-                        <div class='col-xs-12 align-right'>
-                            <div class='box'>
-                                <a href='#'
-                                   class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
-                                   onclick='get_an_info(" + obj.announcements[i].id + ")'><i style='color: #4CAF50'
-                                                                                             class='zmdi zmdi-mail-reply zmd-flip-horizontal'></i></a>
+        <div data-role="header" style="background-color: #4CAF50"
+             class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
+            <h1 style="color: #ffffff; opacity:0;" class="align-center"><b>Panels</b></h1>
+            <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-menu"></i>
+            </a>
+
+            <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-home" data-transition="flip"></i>
+            </a>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div id="acinfo" data-role="content">
+
+        </div>
+    </div>
+
+    <!--appointment page-->
+    <div data-role="page" id="appointmentpage">
+
+        <div data-role="header" style="background-color: #4CAF50"
+             class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
+            <h1 style="color: #ffffff; opacity: 0" class="align-center"><b>Panels</b></h1>
+            <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-menu"></i>
+            </a>
+
+            <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-home" data-transition="flip"></i>
+            </a>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div data-role="content" id="app">
+            <div class='nd2-card'>
+                <div class='card-title'>
+                    <h5 class='' style=''>Marriage Counselling</h5>
+                    <!--<h5>From " + +" to " + +"</h5>-->
+                    <div class='card-action'>
+                        <div class='row between-xs'>
+                            <div class='col-xs-12 align-left'>
+                                <div class='box'>
+                                    <p><i style='color: #4CAF50' class='zmdi zmdi-calendar'></i> &nbsp; 1st June, 2017
+                                    </p>
+                                    <p><i style='color: #4CAF50' class='zmdi zmdi-time'></i>&nbsp; 2:00pm</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div class='nd2-card'>
-            <div class='card-title'>
-                <h4 class='card-primary-title' style='color: #4CAF50;'>Soul Winning</h4>
-                <!--<h5>From " + +" to " + +"</h5>-->
-                <div class='card-action'>
-                    <div class='row between-xs'>
-                        <div class='col-xs-12 align-right'>
-                            <div class='box'>
-                                <a href='#'
-                                   class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
-                                   onclick='get_an_info(" + obj.announcements[i].id + ")'><i style='color: #4CAF50'
-                                                                                             class='zmdi zmdi-mail-reply zmd-flip-horizontal'></i></a>
-                            </div>
+                    <div class='row'>
+                        <div class='col-xs-6'>
+                            <!--<a href='#'-->
+                            <!--class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'-->
+                            <!--onclick=''><i style='font-size: 20px' class='zmdi zmdi-arrow-back'></i></a>-->
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!--announcement info page-->
-<div data-role="page" id="ainfopage">
-
-    <div data-role="header" style="background-color: #4CAF50"
-         class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
-        <h1 style="color: #ffffff; opacity: 0" class="align-center"><b>Panels</b></h1>
-        <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-menu"></i>
-        </a>
-
-        <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-home" data-transition="flip"></i>
-        </a>
-
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <div id="aninfo" data-role="content">
-
-    </div>
-</div>
-
-<!--activity info-->
-<div data-role="page" id="acinfopage">
-
-    <div data-role="header" style="background-color: #4CAF50"
-         class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
-        <h1 style="color: #ffffff; opacity:0;" class="align-center"><b>Panels</b></h1>
-        <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-menu"></i>
-        </a>
-
-        <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-home" data-transition="flip"></i>
-        </a>
-    </div>
-
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <div id="acinfo" data-role="content">
-
-    </div>
-</div>
-
-<!--appointment page-->
-<div data-role="page" id="appointmentpage">
-
-    <div data-role="header" style="background-color: #4CAF50"
-         class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
-        <h1 style="color: #ffffff; opacity: 0" class="align-center"><b>Panels</b></h1>
-        <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-menu"></i>
-        </a>
-
-        <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-home" data-transition="flip"></i>
-        </a>
-    </div>
-
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <div data-role="content" id="app">
-        <div class='nd2-card'>
-            <div class='card-title'>
-                <h5 class='' style=''>Marriage Counselling</h5>
-                <!--<h5>From " + +" to " + +"</h5>-->
-                <div class='card-action'>
-                    <div class='row between-xs'>
-                        <div class='col-xs-12 align-left'>
-                            <div class='box'>
-                                <p><i style='color: #4CAF50' class='zmdi zmdi-calendar'></i> &nbsp; 1st June, 2017</p>
-                                <p><i style='color: #4CAF50' class='zmdi zmdi-time'></i>&nbsp; 2:00pm</p>
-                            </div>
+                        <div class='col-xs-6 align-right'>
+                            <a href='#'
+                               class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
+                               onclick=''><i style='font-size: 20px; color: #4CAF50' class='zmdi zmdi-delete'></i></a>
                         </div>
-                    </div>
-                </div>
 
-                <div class='row'>
-                    <div class='col-xs-6'>
-                        <!--<a href='#'-->
-                        <!--class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'-->
-                        <!--onclick=''><i style='font-size: 20px' class='zmdi zmdi-arrow-back'></i></a>-->
+                        <!--<a href='#' style='background-color: gainsboro'-->
+                        <!--class='ui-btn waves-effect waves-button waves-effect waves-button'-->
+                        <!--onclick='join(" + obj.id + ")'><i style='font-size: 20px'-->
+                        <!--class='zmdi zmdi-account-add'></i></a>-->
                     </div>
-
-                    <div class='col-xs-6 align-right'>
-                        <a href='#'
-                           class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
-                           onclick=''><i style='font-size: 20px; color: #4CAF50' class='zmdi zmdi-delete'></i></a>
-                    </div>
-
-                    <!--<a href='#' style='background-color: gainsboro'-->
-                    <!--class='ui-btn waves-effect waves-button waves-effect waves-button'-->
-                    <!--onclick='join(" + obj.id + ")'><i style='font-size: 20px'-->
-                    <!--class='zmdi zmdi-account-add'></i></a>-->
                 </div>
             </div>
         </div>
-    </div>
 
-    <div data-role="footer" data-position="fixed" style="border: none; background-color: #fff">
-        <div class="row">
-            <div class="col-xs-6"></div>
-            <div class="col-xs-6">
-                <div class="align-right">
-                    <a href="#addapppage" data-role="button" style="background-color: #4CAF50"
-                       class="ui-btn">
-                        <i style="color: #ffffff; font-size: 20px;" class="zmdi zmdi-plus zmd-3x"></i>
-                    </a>
+        <div data-role="footer" data-position="fixed" style="border: none; background-color: #fff">
+            <div class="row">
+                <div class="col-xs-6"></div>
+                <div class="col-xs-6">
+                    <div class="align-right">
+                        <a href="#addapppage" data-role="button" style="background-color: #4CAF50"
+                           class="ui-btn">
+                            <i style="color: #ffffff; font-size: 20px;" class="zmdi zmdi-plus zmd-3x"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-</div>
-
-<!--add appointment page-->
-<div data-role="page" id="addapppage">
-    <!---->
-    <div data-role="header" style="background-color: #4CAF50"
-         class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
-        <h1 style="color: #ffffff; opacity: 0" class="align-center"><b>Panels</b></h1>
-        <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-menu"></i>
-        </a>
+    <!--add appointment page-->
+    <div data-role="page" id="addapppage">
         <!---->
-        <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-home" data-transition="flip"></i>
-        </a>
+        <div data-role="header" style="background-color: #4CAF50"
+             class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
+            <h1 style="color: #ffffff; opacity: 0" class="align-center"><b>Panels</b></h1>
+            <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-menu"></i>
+            </a>
+            <!---->
+            <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-home" data-transition="flip"></i>
+            </a>
+            <!---->
+        </div>
         <!---->
-    </div>
-    <!---->
-    <div data-role="popup" id="asuccesspopup" class="ui-content">
-        <h4 style="color: #4CAF50">Your appointment would be scheduled shortly</h4>
-    </div>
-    <!---->
-    <div data-role="popup" id="afailpopup" class="ui-content">
-        <h4 style="color: crimson">Sorry, your appointment was scheduled.</h4>
-    </div>
-    <!---->
-    <div data-role="popup" id="afailpopup2" class="ui-content">
-        <h4 style="color: crimson">Please fill out all empty fields !</h4>
-    </div>
-    <!---->
-    <!--<div data-role="popup" id="efailpopup3" class="ui-content">-->
-    <!--<h4 style="color: crimson">Invalid telephone number !</h4>-->
-    <!--</div>-->
-    <!---->
-    <!--<div data-role="popup" id="efailpopup4" class="ui-content">-->
-    <!--<h4 style="color: crimson">Passwords do not match !</h4>-->
-    <!--</div>-->
-    <!---->
-    <!--<div data-role="popup" id="efailpopup5" class="ui-content">-->
-    <!--<h4 style="color: crimson">Your password should be at least 8 characters long !</h4>-->
-    <!--</div>-->
-    <!---->
-    <div data-role="content">
-        <!--name-->
-        <div>
+        <div data-role="popup" id="asuccesspopup" class="ui-content">
+            <h4 style="color: #4CAF50">Your appointment would be scheduled shortly</h4>
+        </div>
+        <!---->
+        <div data-role="popup" id="afailpopup" class="ui-content">
+            <h4 style="color: crimson">Sorry, your appointment was scheduled.</h4>
+        </div>
+        <!---->
+        <div data-role="popup" id="afailpopup2" class="ui-content">
+            <h4 style="color: crimson">Please fill out all empty fields !</h4>
+        </div>
+        <!---->
+        <!--<div data-role="popup" id="efailpopup3" class="ui-content">-->
+        <!--<h4 style="color: crimson">Invalid telephone number !</h4>-->
+        <!--</div>-->
+        <!---->
+        <!--<div data-role="popup" id="efailpopup4" class="ui-content">-->
+        <!--<h4 style="color: crimson">Passwords do not match !</h4>-->
+        <!--</div>-->
+        <!---->
+        <!--<div data-role="popup" id="efailpopup5" class="ui-content">-->
+        <!--<h4 style="color: crimson">Your password should be at least 8 characters long !</h4>-->
+        <!--</div>-->
+        <!---->
+        <div data-role="content">
+            <!--name-->
+            <div>
 <textarea id="purpose" placeholder="Write something here." required
           style="text-align: center;"></textarea>
-        </div>
-        <!---->
-        <div>
-            <input type="date" id="apdate" placeholder="Date" required style="text-align: center;">
-        </div>
-        <!---->
-        <div>
-            <input type="time" id="aptime" placeholder="Time" required style="text-align: center;">
-        </div>
-        <!---->
-        <br>
-        <br>
-        <div>
-            <a style="background-color: #4CAF50;color: #fff;" data-role="button" id="appaddbutton"
-               onclick="add_app()">Submit</a>
+            </div>
+            <!---->
+            <div>
+                <input type="date" id="apdate" placeholder="Date" required style="text-align: center;">
+            </div>
+            <!---->
+            <div>
+                <input type="time" id="aptime" placeholder="Time" required style="text-align: center;">
+            </div>
+            <!---->
+            <br>
+            <br>
+            <div>
+                <a style="background-color: #4CAF50;color: #fff;" data-role="button" id="appaddbutton"
+                   onclick="add_app()">Submit</a>
+            </div>
         </div>
     </div>
-</div>
-<!---->
-<!--messages page-->
-<div data-role="page" id="messagespage">
-    <!---->
-    <div data-role="header" style="background-color: #4CAF50"
-         class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
-        <h1 style="color: #ffffff; opacity: 0;" class="align-center"><b>Panels</b></h1>
-        <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-menu"></i>
-        </a>
+
+    <!--messages page-->
+    <div data-role="page" id="messagespage">
         <!---->
-        <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
-            <i class="zmdi zmdi-home" data-transition="flip"></i>
-        </a>
+        <div data-role="header" style="background-color: #4CAF50"
+             class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
+            <h1 style="color: #ffffff; opacity: 0;" class="align-center"><b>Panels</b></h1>
+            <a href="#leftpanel" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-menu"></i>
+            </a>
+            <!---->
+            <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
+                <i class="zmdi zmdi-home" data-transition="flip"></i>
+            </a>
+            <!---->
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
         <!---->
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <!---->
-    <div id="msg" data-role="content" class="">
-        <div class='nd2-card'>
-            <div class='card-title'>
-                <h4 class='card-primary-title' style='color: #4CAF50;'>David and Goliath</h4>
-                <!--//<h5>From " + +" to " + +"</h5>";-->
-                <div class='card-action'>
-                    <div class='row between-xs'>
-                        <div class='col-xs-12 align-left'>
-                            <div class='box'>
-                                <p><i style='color: #4CAF50' class='zmdi zmdi-book'></i> &nbsp; 2 Kings 12:89 </p>
-                                <p><i style='color: #4CAF50' class='zmdi zmdi-link'></i><a> &nbsp;
-                                    https://cdnjs.cloudflare.com/ajax/libs/</a>
-                                </p>
+        <div id="msg" data-role="content" class="">
+            <div class='nd2-card'>
+                <div class='card-title'>
+                    <h4 class='card-primary-title' style='color: #4CAF50;'>David and Goliath</h4>
+                    <!--//<h5>From " + +" to " + +"</h5>";-->
+                    <div class='card-action'>
+                        <div class='row between-xs'>
+                            <div class='col-xs-12 align-left'>
+                                <div class='box'>
+                                    <p><i style='color: #4CAF50' class='zmdi zmdi-book'></i> &nbsp; 2 Kings 12:89 </p>
+                                    <p><i style='color: #4CAF50' class='zmdi zmdi-link'></i><a> &nbsp;
+                                        https://cdnjs.cloudflare.com/ajax/libs/</a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -834,82 +873,81 @@
             </div>
         </div>
     </div>
-</div>
 
-<!--panel-->
-<div data-role="panel" id="leftpanel" data-display="overlay" data-position-fixed="true"
-     style="background-color: white;">
+    <!--panel-->
+    <div data-role="panel" id="leftpanel" data-display="overlay" data-position-fixed="true"
+         style="background-color: white;">
 
-    <!--<a data-role="button">Profile</a>-->
+        <!--<a data-role="button">Profile</a>-->
 
-    <ul data-role="listview" data-icon="false">
-        <li data-role="list-divider" class="">
-            Menu
-        </li>
-        <hr style="opacity: .2">
+        <ul data-role="listview" data-icon="false">
+            <li data-role="list-divider" class="">
+                Menu
+            </li>
+            <hr style="opacity: .2">
 
-        <!---->
-        <li>
-            <a href="#profilepage">
-                <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-account"></i>&nbsp;&nbsp;&nbsp;&nbsp;PROFILE
-                </h5>
-            </a>
-        </li>
+            <!---->
+            <li>
+                <a onclick="get_profile_data()">
+                    <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-account"></i>&nbsp;&nbsp;&nbsp;&nbsp;PROFILE
+                    </h5>
+                </a>
+            </li>
 
-        <li>
-            <a href="#announcementpage">
-                <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-comment-outline"></i>&nbsp;&nbsp;&nbsp;&nbsp;ANNOUNCEMENTS
-                </h5>
-                <!--<h2></h2>-->
-            </a>
-        </li>
-        <!---->
-        <li>
-            <a href="#appointmentpage">
-                <h5 class="h" style="font-weight: lighter"><i class="zmdi zmdi-receipt"></i>&nbsp;&nbsp;&nbsp;&nbsp;APPOINTMENTS
-                </h5>
-                <!--<h2></h2>-->
-            </a>
-        </li>
-        <!---->
-        <li>
-            <a href="#activitiespage">
-                <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-calendar-note"></i>&nbsp;&nbsp;&nbsp;&nbsp;ACTIVITIES
-                </h5>
-                <!--<h2></h2>-->
-            </a>
-        </li>
-        <!---->
-        <li>
-            <a href="#messagespage">
-                <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-collection-bookmark"></i>&nbsp;&nbsp;&nbsp;&nbsp;SERMONS
-                </h5>
-                <!--<h2></h2>-->
-            </a>
-            <!--<hr style="opacity: .5">-->
-        </li>
+            <li>
+                <a href="#announcementpage">
+                    <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-comment-outline"></i>&nbsp;&nbsp;&nbsp;&nbsp;ANNOUNCEMENTS
+                    </h5>
+                    <!--<h2></h2>-->
+                </a>
+            </li>
+            <!---->
+            <li>
+                <a href="#appointmentpage">
+                    <h5 class="h" style="font-weight: lighter"><i class="zmdi zmdi-receipt"></i>&nbsp;&nbsp;&nbsp;&nbsp;APPOINTMENTS
+                    </h5>
+                    <!--<h2></h2>-->
+                </a>
+            </li>
+            <!---->
+            <li>
+                <a href="#activitiespage">
+                    <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-calendar-note"></i>&nbsp;&nbsp;&nbsp;&nbsp;ACTIVITIES
+                    </h5>
+                    <!--<h2></h2>-->
+                </a>
+            </li>
+            <!---->
+            <li>
+                <a href="#messagespage">
+                    <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-collection-bookmark"></i>&nbsp;&nbsp;&nbsp;&nbsp;SERMONS
+                    </h5>
+                    <!--<h2></h2>-->
+                </a>
+                <!--<hr style="opacity: .5">-->
+            </li>
 
-        <li>
-            <a href="#dashboard">
-                <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-view-dashboard"></i>&nbsp;&nbsp;&nbsp;&nbsp;DASHBOARD
-                </h5>
-                <!--<h2></h2>-->
-            </a>
-            <!--<hr style="opacity: .5">-->
-        </li>
+            <li>
+                <a href="#dashboard">
+                    <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-view-dashboard"></i>&nbsp;&nbsp;&nbsp;&nbsp;DASHBOARD
+                    </h5>
+                    <!--<h2></h2>-->
+                </a>
+                <!--<hr style="opacity: .5">-->
+            </li>
 
-        <li>
-            <a href="#loginpage">
-                <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;HOME
-                </h5>
-                <!--<h2></h2>-->
-            </a>
-            <hr style="opacity: .5">
-        </li>
+            <li>
+                <a href="#loginpage">
+                    <h5 class="h" style="font-weight: lighter;"><i class="zmdi zmdi-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;HOME
+                    </h5>
+                    <!--<h2></h2>-->
+                </a>
+                <hr style="opacity: .5">
+            </li>
 
-    </ul>
+        </ul>
 
-</div>
+    </div>
 
 </body>
 

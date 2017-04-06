@@ -6,7 +6,7 @@
  * Time: 9:30 AM
  */
 
-include_once "User.php";
+include_once "Model.php";
 include_once "Slide.php";
 
 if (isset($_REQUEST['cmd'])) {
@@ -16,7 +16,7 @@ if (isset($_REQUEST['cmd'])) {
     switch ($command) {
 
         case 1:
-            sign_up();
+            get_profile_data();
             break;
 
         case 2:
@@ -59,25 +59,85 @@ if (isset($_REQUEST['cmd'])) {
             get_slides();
             break;
 
+        case 12:
+            get_group_data();
+            break;
+
         default:
             break;
     }
 }
 
-function sign_up()
+function login()
 {
     $username = $_GET['username'];
     $password = $_GET['password'];
-    $telephone = $_GET['telephone'];
 
-    $user = new User();
+    $model = new Model();
 
-    $res = $user->signup($username, $telephone, $password);
-//
-    if ($res == false) {
+    $data = $model->login($username, $password);
+
+    $row = $data->fetch_assoc();
+
+    $d_id = $row['id'];
+    $d_username = $row['username'];
+    $d_password = $row['password'];
+
+    $u_compare = strcmp($username, $d_username);
+    $p_compare = strcmp($password, $d_password);
+
+    if ($u_compare == 0 && $p_compare == 0) {
+        echo '{"result":1, "id":' . $d_id . '}';
+    } else {
+        echo '{"result":0}';
+    }
+}
+
+function get_profile_data()
+{
+    $id = $_GET['id'];
+
+    $model = new Model();
+
+    $data = $model->get_user_details($id);
+
+    $row = $data->fetch_assoc();
+
+    if ($data->num_rows == 0) {
         echo '{"result":0}';
     } else {
-        echo '{"result":1}';
+        echo '{"result":1,"username":"' . $row['username'] . '","firstname":"' . $row['first_name'] . '","middlename":"' . $row["middle_name"] . '", "lastname":"' . $row['last_name'] . '","email":"' . $row['email'] . '","phonenumber":"' . $row['phone_number'] . '"}';
+    }
+}
+
+function get_group_data()
+{
+    $id = $_GET['id'];
+
+    $model = new Model();
+
+    $data = $model->get_user_groups($id);
+
+//    $rows = $data->fetch_assoc();
+
+    if ($data->num_rows == 0) {
+        echo '{"result":0}';
+    } else {
+
+        $rows = $data->fetch_assoc();
+
+        echo '{
+            "result":1, "groups":[';
+
+        while ($rows) {
+            echo json_encode($rows);
+            $rows = $data->fetch_assoc();
+
+            if ($rows) {
+                echo ",";
+            }
+        }
+        echo "]}";
     }
 }
 
@@ -93,35 +153,11 @@ function add_appointment()
     $res = $user->add_appointment($id, $purpose, $date, $time);
 
     if ($res == false) {
-        echo '{"result":0}';
+        echo '{
+            "result":0}';
     } else {
-        echo '{"result":1}';
-    }
-}
-
-function login()
-{
-    $username = $_GET['username'];
-    $password = $_GET['password'];
-
-    $user = new User();
-
-    $data = $user->login($username, $password);
-
-    $row = $data->fetch_assoc();
-
-    $d_id = $row['id'];
-    $d_username = $row['username'];
-    $d_telephone = $row['telephone'];
-    $d_password = $row['password'];
-
-    $u_compare = strcmp($username, $d_username);
-    $p_compare = strcmp($password, $d_password);
-
-    if ($u_compare == 0 && $p_compare == 0) {
-        echo '{"result":1, "id":' . $row['id'] . ',"username": "' . $d_username . '", "telephone": "' . $d_telephone . '", "password":"' . $d_password . '"}';
-    } else {
-        echo '{"result":0}';
+        echo '{
+            "result":1}';
     }
 }
 
@@ -136,9 +172,11 @@ function update()
     $res = $user->update($username, $telephone, $password);
 
     if ($res == false) {
-        echo '{"result":0}';
+        echo '{
+            "result":0}';
     } else {
-        echo '{"result":1}';
+        echo '{
+            "result":1}';
     }
 }
 
@@ -149,12 +187,14 @@ function view_announcements()
     $results = $user->view_announcements();
 
     if ($results->num_rows <= 0) {
-        echo '{"result":0}';
+        echo '{
+            "result":0}';
     } else {
 
         $rows = $results->fetch_assoc();
 
-        echo '{"result":1, "announcements":[';
+        echo '{
+            "result":1, "announcements":[';
 
         while ($rows) {
             echo json_encode($rows);
@@ -175,12 +215,14 @@ function view_messages()
     $results = $user->view_messages();
 
     if ($results->num_rows <= 0) {
-        echo '{"result":0}';
+        echo '{
+                "result":0}';
     } else {
 
         $rows = $results->fetch_assoc();
 
-        echo '{"result":1, "messages":[';
+        echo '{
+                "result":1, "messages":[';
 
         while ($rows) {
             echo json_encode($rows);
@@ -203,12 +245,14 @@ function view_appointments()
     $results = $user->view_appointments($id);
 
     if ($results->num_rows <= 0) {
-        echo '{"result":0}';
+        echo '{
+                    "result":0}';
     } else {
 
         $rows = $results->fetch_assoc();
 
-        echo '{"result":1, "myapps":[';
+        echo '{
+                    "result":1, "myapps":[';
 
         while ($rows) {
             echo json_encode($rows);
@@ -229,12 +273,14 @@ function view_activities()
     $results = $user->view_activities();
 
     if ($results->num_rows <= 0) {
-        echo '{"result":0}';
+        echo '{
+                        "result":0}';
     } else {
 
         $rows = $results->fetch_assoc();
 
-        echo '{"result":1, "activities":[';
+        echo '{
+                        "result":1, "activities":[';
 
         while ($rows) {
             echo json_encode($rows);
@@ -259,9 +305,11 @@ function get_announcement()
     $rows = $results->fetch_assoc();
 
     if ($results->num_rows <= 0) {
-        echo '{"result":0}';
+        echo '{
+                            "result":0}';
     } else {
-        echo '{"result":1, "message":"' . $rows['message'] . '", "date":"' . $rows['date'] . '", "time":"' . $rows['time'] . '"}';
+        echo '{
+                            "result":1, "message":"' . $rows['message'] . '", "date":"' . $rows['date'] . '", "time":"' . $rows['time'] . '"}';
     }
 }
 
@@ -276,9 +324,11 @@ function get_activity()
     $rows = $results->fetch_assoc();
 
     if ($results->num_rows <= 0) {
-        echo '{"result":0}';
+        echo '{
+                            "result":0}';
     } else {
-        echo '{"result":1, "info":"' . $rows['info'] . '", "date":"' . $rows['date'] . '", "time":"' . $rows['time'] . '"}';
+        echo '{
+                            "result":1, "info":"' . $rows['info'] . '", "date":"' . $rows['date'] . '", "time":"' . $rows['time'] . '"}';
     }
 }
 
@@ -289,12 +339,14 @@ function get_slides()
     $results = $slide->get_slides();
 
     if ($results->num_rows <= 0) {
-        echo '{"result":0}';
+        echo '{
+                            "result":0}';
     } else {
 
         $rows = $results->fetch_assoc();
 
-        echo '{"result":1, "slides":[';
+        echo '{
+                            "result":1, "slides":[';
 
         while ($rows) {
             echo json_encode($rows);

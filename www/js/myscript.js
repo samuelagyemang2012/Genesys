@@ -7,7 +7,7 @@ var imgs = [];
 
 $(function () {
     $("[data-role=header]").toolbar();
-    $("[data-role=popup]").popup().enhanceWithin();
+    //$("[data-role=popup]").popup().enhanceWithin();
 });
 
 function send_request(url) {
@@ -25,53 +25,104 @@ function change_page(page, transition) {
     $.mobile.pageContainer.pagecontainer("change", page, {transition: transition});
 }
 
-function sign_up() {
-    var url, username, telephone, password, cpassword, obj, bool;
+function login() {
 
-    username = $("#susername").val();
-    telephone = $("#stel").val();
-    password = $("#spassword").val();
-    cpassword = $("#scpassword").val();
+    var url, username, password, obj;
 
-    //if not null
-    if (username.length > 0 && telephone.length > 0 && password.length > 0 && cpassword.length > 0) {
+    username = $("#username").val();
+    password = $("#password").val();
 
-        if (telephone.length < 10) {
-            $("#sfailpopup3").popup("open", {transition: "slide"});
-        }
+    //not null
+    if (username.length > 0 && password.length > 0) {
+        url = "./server-side/controller.php?cmd=2&username=" + username + "&password=" + password;
+        obj = send_request(url);
 
-        if (password.length < 8) {
-            $("#sfailpopup4").popup("open", {transition: "slide"});
-        }
+        if (obj.result == 1) {
 
-        bool = password.localeCompare(cpassword);
+            global_id = obj.id;
 
-        if (bool !== 0) {
-            $("#sfailpopup").popup("open", {transition: "slide"});
-        }
+            set_cookies(global_id);
 
-        if (bool === 0 && password.length >= 8 && telephone.length >= 10) {
+            setTimeout(
+                function () {
+                    change_page("#dashboard", "");
+                }, 800);
 
-            //alert("dasdsad");
-
-            url = "./server-side/controller.php?cmd=1&username=" + username + "&telephone=" + telephone + "&password=" + password;
-            obj = send_request(url);
-
-            if (obj.result == 1) {
-                $("#successpopup").popup("open", {transition: "slide"});
-
-                setTimeout(
-                    function () {
-                        change_page("#loginpage", "")
-                    }, 800);
-            }
-            //} else {
-            //    alert("failed");
-            //$("#failpopup").popup("open", {transition: "slide"});
-            //}
+        } else {
+            $("#loginfailpopup").popup("open", {transition: "slide"});
         }
     } else {
-        $("#sfailpopup2").popup("open", {transition: "slide"});
+        $("#loginfailpopup2").popup("open", {transition: "slide"});
+    }
+}
+
+function get_profile_data() {
+    var url, url1, id, obj, obj1, build;
+
+    id = global_id;
+    build = "";
+
+    url = "./server-side/controller.php?cmd=1&id=" + id;
+    url1 = "./server-side/controller.php?cmd=12&id=" + id;
+
+    obj = send_request(url);
+    obj1 = send_request(url1);
+
+    if (obj1.result == 1) {
+
+        //alert(obj1.groups[0].group_name);
+        for (var i in obj1.groups) {
+            build += "<p class='align-center'>" + obj1.groups[i].group_name + "</p>";
+        }
+
+        $("#pgroups").html(build);
+    }
+
+    if (obj.result == 1) {
+
+        set_profile_info(obj.username, obj.firstname, obj.middlename, obj.lastname, obj.email, obj.phonenumber);
+        //set_edit_info(obj.username, obj.firstname, obj.middlename, obj.lastname, obj.email, obj.phonenumber);
+
+        setTimeout(
+            function () {
+                change_page("#profilepage", "")
+            }, 800);
+    }//must have else;
+}
+
+function get_edit_info() {
+
+    var url, url1, obj, obj1, id, build;
+
+    id = global_id;
+    build = "";
+
+    url = "./server-side/controller.php?cmd=1&id=" + id;
+    url1 = "./server-side/controller.php?cmd=12&id=" + id;
+
+    obj1 = send_request(url1);
+    obj = send_request(url);
+
+    if (obj1.result == 1) {
+
+        build += "<legend>Groups</legend>";
+
+        //<legend>Groups</legend>
+        //    <input type="checkbox" name="checkbox-1a" id="checkbox-1ab" checked="">
+        //        <label for="checkbox-1ab">Cheetos</label>
+
+        for (var i in obj1.groups) {
+            build += "<input type='checkbox' name='" + obj1.groups[i].group_name + "' id='"+obj1.groups[i].+"'";
+        }
+    }
+
+    if (obj.result == 1) {
+        set_edit_info(obj.username, obj.firstname, obj.middlename, obj.lastname, obj.email, obj.phonenumber);
+
+        setTimeout(
+            function () {
+                change_page("#profilepage", "")
+            }, 800);
     }
 }
 
@@ -104,71 +155,30 @@ function add_app() {
     }
 }
 
-function get_profile_info() {
-    $("#pusername").val($.cookie("username"));
-    $("#ptel").val("" + $.cookie("telephone") + "");
-    $("#ppassword").val("" + $.cookie("password") + "");
+function set_profile_info(u, f, m, l, e, t) {
 
-    change_page("#profilepage", "")
+    $("#pusername").val(u);
+    $("#pfname").val(f);
+    $("#pmname").val(m);
+    $("#plname").val(l);
+    $("#pemail").val(e);
+    $("#ptelephone").val(t);
 }
 
-function get_edit_info() {
+function set_edit_info(u, f, m, l, e, t) {
+    //
+    $("#eusername").val(u);
+    $("#efname").val(f);
+    $("#emname").val(m);
+    $("#elname").val(l);
+    $("#eemail").val(e);
+    $("#etelephone").val(t);
 
-    $("#eusername").val($.cookie("username"));
-    $("#etel").val("" + $.cookie("telephone") + "");
-    $("#epassword").val("" + $.cookie("password") + "");
-    $("#ecpassword").val("" + $.cookie("password") + "");
-
-    change_page("#editpage", "slidedown");
+    //change_page("#editpage", "slidedown");
 }
 
-function login() {
-
-    var url, username, password, obj, bool, telephone;
-
-    username = $("#username").val();
-    password = $("#password").val();
-
-    //not null
-    if (username.length > 0 && password.length > 0) {
-        url = "./server-side/controller.php?cmd=2&username=" + username + "&password=" + password;
-        obj = send_request(url);
-
-        //alert(obj.result);
-
-        if (obj.result == 1) {
-            //alert(obj.id);
-            global_id = obj.id;
-            //alert(global_id);
-            global_username = username;
-            global_telephone = obj.telephone;
-            global_password = password;
-
-            set_cookies(global_id, global_username, global_telephone, global_password);
-
-            setTimeout(
-                function () {
-                    change_page("#dashboard", "");
-                }, 800);
-
-        } else {
-            $("#loginfailpopup").popup("open", {transition: "slide"});
-        }
-    } else {
-        $("#loginfailpopup2").popup("open", {transition: "slide"});
-    }
-}
-
-function set_cookies(i, u, t, p) {
-
+function set_cookies(i) {
     $.cookie('id', i);
-
-    $.cookie('username', u);
-
-    //global_telephone = obj.telephone;
-    $.cookie('telephone', t);
-
-    $.cookie('password', p);
 }
 
 function view_announcements() {
@@ -552,6 +562,7 @@ function update() {
     }
 }
 
+
 //test code or UI demo
 function toprofile() {
     change_page('#profilepage', '');
@@ -576,4 +587,4 @@ function toser() {
 function todash() {
     change_page('#dashboard', '');
 }
-
+//

@@ -143,14 +143,17 @@ function get_group_data()
 
 function add_appointment()
 {
-    $id = $_GET['id'];
+    $name = $_GET['name'];
+    $wts = $_GET['wts'];
     $purpose = $_GET['purpose'];
+    $duration = $_GET['duration'];
     $date = $_GET['date'];
-    $time = $_GET['time'];
+    $comment = $_GET['comment'];
+    $id = $_GET['id'];
 
-    $user = new User();
+    $model = new Model();
 
-    $res = $user->add_appointment($id, $purpose, $date, $time);
+    $res = $model->add_appointment($name, $wts, $purpose, $duration, $date, $comment, $id);
 
     if ($res == false) {
         echo '{
@@ -164,19 +167,21 @@ function add_appointment()
 function update()
 {
     $username = $_GET['username'];
+    $firstname = $_GET['firstname'];
+    $middlename = $_GET['middlename'];
+    $lastname = $_GET['lastname'];
+    $email = $_GET['email'];
     $telephone = $_GET['telephone'];
-    $password = $_GET['password'];
+    $id = $_GET['id'];
 
-    $user = new User();
+    $model = new Model();
 
-    $res = $user->update($username, $telephone, $password);
+    $res = $model->update($username, $firstname, $middlename, $lastname, $email, $telephone, $id);
 
     if ($res == false) {
-        echo '{
-            "result":0}';
+        echo '{"result":0}';
     } else {
-        echo '{
-            "result":1}';
+        echo '{"result":1}';
     }
 }
 
@@ -210,9 +215,9 @@ function view_announcements()
 
 function view_messages()
 {
-    $user = new User();
+    $model = new Model();
 
-    $results = $user->view_messages();
+    $results = $model->view_sermons();
 
     if ($results->num_rows <= 0) {
         echo '{
@@ -238,11 +243,11 @@ function view_messages()
 
 function view_appointments()
 {
-    $user = new User();
+    $model = new Model();
 
     $id = $_GET['id'];
 
-    $results = $user->view_appointments($id);
+    $results = $model->view_appointments($id);
 
     if ($results->num_rows <= 0) {
         echo '{
@@ -268,19 +273,17 @@ function view_appointments()
 
 function view_activities()
 {
-    $user = new User();
+    $model = new Model();
 
-    $results = $user->view_activities();
+    $results = $model->view_activities();
 
     if ($results->num_rows <= 0) {
-        echo '{
-                        "result":0}';
+        echo '{"result":0}';
     } else {
 
         $rows = $results->fetch_assoc();
 
-        echo '{
-                        "result":1, "activities":[';
+        echo '{"result":1, "activities":[';
 
         while ($rows) {
             echo json_encode($rows);
@@ -305,11 +308,9 @@ function get_announcement()
     $rows = $results->fetch_assoc();
 
     if ($results->num_rows <= 0) {
-        echo '{
-                            "result":0}';
+        echo '{"result":0}';
     } else {
-        echo '{
-                            "result":1, "message":"' . $rows['message'] . '", "date":"' . $rows['date'] . '", "time":"' . $rows['time'] . '"}';
+        echo '{"result":1, "message":"' . $rows['message'] . '", "date":"' . $rows['date'] . '", "time":"' . $rows['time'] . '"}';
     }
 }
 
@@ -324,11 +325,9 @@ function get_activity()
     $rows = $results->fetch_assoc();
 
     if ($results->num_rows <= 0) {
-        echo '{
-                            "result":0}';
+        echo '{"result":0}';
     } else {
-        echo '{
-                            "result":1, "info":"' . $rows['info'] . '", "date":"' . $rows['date'] . '", "time":"' . $rows['time'] . '"}';
+        echo '{"result":1, "info":"' . $rows['info'] . '", "date":"' . $rows['date'] . '", "time":"' . $rows['time'] . '"}';
     }
 }
 
@@ -339,14 +338,12 @@ function get_slides()
     $results = $slide->get_slides();
 
     if ($results->num_rows <= 0) {
-        echo '{
-                            "result":0}';
+        echo '{ "result":0}';
     } else {
 
         $rows = $results->fetch_assoc();
 
-        echo '{
-                            "result":1, "slides":[';
+        echo '{"result":1, "slides":[';
 
         while ($rows) {
             echo json_encode($rows);

@@ -50,12 +50,12 @@
         </a>
     </div>
 
-    <div data-role="popup" id="loginfailpopup" class="ui-content" style="background-color: white; border: none">
-        <h4 style="color: crimson">Wrong username or password.</h4>
+    <div data-role="popup" id="loginfail2" class="ui-content" style="background-color: white; border: none">
+        <h4 style="color: crimson">Please fill out all fields !</h4>
     </div>
 
-    <div data-role="popup" id="loginfailpopup2" class="ui-content" style="background-color: white; border: none">
-        <h4 style="color: crimson">Please fill out all fields !</h4>
+    <div data-role="popup" id="loginfail" class="ui-content" style="background-color: white; border: none">
+        <h4 style="color: crimson">Wrong username or password.</h4>
     </div>
 
     <div data-role="content">
@@ -103,7 +103,7 @@
 
             <br>
             <br>
-            <!---->
+
             <div>
                 <input type="text" id="username" placeholder="Username" style="color: #4CAF50; text-align: center"
                        required>
@@ -122,6 +122,38 @@
             <!--<div class="align-center">-->
             <!--<h5>Sign up <a href="#signuppage" data-transition="slide" style="color: #4CAF50">here !</a></h5>-->
             <!--</div>-->
+        </div>
+    </div>
+</div>
+
+<!--Change password-->
+<div data-role="page" id="changepasswordpage">
+    <div data-role="header" style="background-color: #4CAF50">
+        <h1 style="color: #ffffff; opacity: 0" class="align-center"><b>Panels</b></h1>
+        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="flip">
+
+        </a>
+
+        <a href="#loginpage" class="ui-btn ui-btn-icon-right" data-transition="flip">
+            <i class="zmdi zmdi-home" data-transition="flip"></i>
+        </a>
+    </div>
+
+    <div data-role="content">
+        <div>
+            <input type="text" id="newpassword" placeholder="New Password" style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+
+        <div>
+            <input type="text" id="cnewpassword" placeholder="Confirm Password"
+                   style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+
+        <div>
+            <a data-role="button" id="loginupdagebutton" style="background-color: #4CAF50;color: #fff" onclick="">Change
+                Password</a>
         </div>
     </div>
 </div>

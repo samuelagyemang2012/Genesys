@@ -162,19 +162,19 @@
 <div data-role="page" id="dashboard">
 
     <div class="row">
-        <div id="firstrow" class="col-xs-12 col-sm-12" style="" onclick="">
+        <a href="https://odb.org/"><div id="firstrow" class="col-xs-12 col-sm-12" style="" onclick="">
             <div class="align-center">
                 <img id="fi" src="./img/odb.png" class="img-responsive">
             </div>
-        </div>
+        </div></a>
     </div>
 
     <div class="row">
-        <div id="secondrow" class="col-xs-12" onclick="">
+        <a href="https://www.biblegateway.com"><div id="secondrow" class="col-xs-12" onclick="">
             <div class="align-center">
                 <img src="img/bible.png" class="img-responsive">
             </div>
-        </div>
+        </div></a>
     </div>
 
     <div class="row">
@@ -388,13 +388,13 @@
     <br>
     <br>
     <br>
-    <div data-role="content" id="profile">
+    <!--<div data-role="content" id="profile">-->
 
-        <div class="align-center">
-            <img class="image" src="./img/sam.jpg" style=" border-radius: 50%; max-width: 100%" height="180px"
-                 width="180px">
-        </div>
-    </div>
+        <!--<div class="align-center">-->
+            <!--<img class="image" src="./img/sam.jpg" style=" border-radius: 50%; max-width: 100%" height="180px"-->
+                 <!--width="180px">-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div data-role="content">
         <h1></h1>
@@ -748,42 +748,7 @@
     <br>
 
     <div data-role="content" id="app">
-        <div class='nd2-card'>
-            <div class='card-title'>
-                <h5 class='' style=''>Marriage Counselling</h5>
-                <!--<h5>From " + +" to " + +"</h5>-->
-                <div class='card-action'>
-                    <div class='row between-xs'>
-                        <div class='col-xs-12 align-left'>
-                            <div class='box'>
-                                <p><i style='color: #4CAF50' class='zmdi zmdi-calendar'></i> &nbsp; 1st June, 2017
-                                </p>
-                                <p><i style='color: #4CAF50' class='zmdi zmdi-time'></i>&nbsp; 2:00pm</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class='row'>
-                    <div class='col-xs-6'>
-                        <!--<a href='#'-->
-                        <!--class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'-->
-                        <!--onclick=''><i style='font-size: 20px' class='zmdi zmdi-arrow-back'></i></a>-->
-                    </div>
-
-                    <div class='col-xs-6 align-right'>
-                        <a href='#'
-                           class='ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button waves-effect waves-button'
-                           onclick=''><i style='font-size: 20px; color: #4CAF50' class='zmdi zmdi-delete'></i></a>
-                    </div>
-
-                    <!--<a href='#' style='background-color: gainsboro'-->
-                    <!--class='ui-btn waves-effect waves-button waves-effect waves-button'-->
-                    <!--onclick='join(" + obj.id + ")'><i style='font-size: 20px'-->
-                    <!--class='zmdi zmdi-account-add'></i></a>-->
-                </div>
-            </div>
-        </div>
     </div>
 
     <div data-role="footer" data-position="fixed" style="border: none; background-color: #fff">
@@ -818,14 +783,14 @@
         <!---->
     </div>
     <!---->
-    <div data-role="popup" id="asuccesspopup" class="ui-content">
-        <h4 style="color: #4CAF50">Your appointment would be scheduled shortly</h4>
+    <div data-role="popup" id="addappsuccess" class="ui-content">
+        <h4 style="color: #4CAF50">Your appointment has been scheduled.</h4>
     </div>
-    <!---->
-    <div data-role="popup" id="afailpopup" class="ui-content">
-        <h4 style="color: crimson">Sorry, your appointment was scheduled.</h4>
+
+    <div data-role="popup" id="addappfail" class="ui-content">
+        <h4 style="color: crimson">Sorry, your appointment was not scheduled.</h4>
     </div>
-    <!---->
+
     <div data-role="popup" id="afailpopup2" class="ui-content">
         <h4 style="color: crimson">Please fill out all empty fields !</h4>
     </div>

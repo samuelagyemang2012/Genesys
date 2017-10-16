@@ -180,7 +180,7 @@
 
 @media screen and (max-width: 640px) {
     #firstrow {
-        background-color: #0088bb;
+        background-color: #fff;
         height: 100vh;
     }
 
@@ -224,9 +224,8 @@
     }
 
     /*#fi {*/
-        /*background-image: url("../img/odb.jpg");*/
+    /*background-image: url("../img/odb.jpg");*/
     /*}*/
-
     .img-responsive {
         /*padding-top: 10vh;*/
         max-width: 200vh;
@@ -245,12 +244,12 @@
     }
 
     #secondrow {
-        background-color: yellow;
+        background-color: #721F15;
         height: 29vh;
     }
 
     #thirdrow {
-        background-color: yellowgreen;
+        background-color: #89BB48;
         height: 29vh;
     }
 

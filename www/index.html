@@ -34,6 +34,7 @@
 //            get_slides();
 //
             $("body>[data-role='panel']").panel().enhanceWithin();
+            set_social_media();
         });
 
         document.addEventListener("backbutton", function (e) {
@@ -191,7 +192,8 @@
         </div>
 
         <div>
-            <a data-role="button" id="loginupdagebutton" style="background-color: #4CAF50;color: #fff" onclick="change_password()">Change
+            <a data-role="button" id="loginupdagebutton" style="background-color: #4CAF50;color: #fff"
+               onclick="change_password()">Change
                 Password</a>
         </div>
     </div>
@@ -247,8 +249,8 @@
             <div class="align-center">
                 <br>
                 <br>
-                <a id="facebooklink" data-role="button" class="ui-btn"><i id="facebook"
-                                                                          class="zmdi zmdi-facebook icons"></i></a>
+                <a id="facebooklink" href="" data-role="button" class="ui-btn"><i id="facebook"
+                                                                                  class="zmdi zmdi-facebook icons"></i></a>
                 <!--<p style="color: #fff">SERMONS</p>-->
             </div>
         </div>
@@ -257,7 +259,7 @@
             <div class="align-center">
                 <br>
                 <br>
-                <a id="youtubelink" href="#" class="ui-btn"><i id="youtube" class="zmdi zmdi-twitter icons"></i></a>
+                <a id="twitterlink" href="" class="ui-btn"><i id="twitter" class="zmdi zmdi-twitter icons"></i></a>
                 <!--<p style="color: #fff">SERMONS</p>-->
             </div>
         </div>
@@ -573,6 +575,7 @@
 <!--announcement page-->
 <div data-role="page" id="announcementpage">
 
+
     <div data-role="header" style="background-color: #4CAF50"
          class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
         <h1 style="color: #ffffff; opacity: 0;" class="align-center"><b>Panels</b></h1>
@@ -590,22 +593,22 @@
     <br>
 
     <div id="ann" data-role="content">
-        <div class='nd2-card'>
-            <div class='card-title'>
-                <h3 class='card-primary-title' style='color: #4CAF50;'>David and Goliath</h3>
-                <!--//<h5>From " + +" to " + +"</h5>";-->
-                <div class='card-action'>
-                    <div class='row between-xs'>
-                        <div class='col-xs-12 align-left'>
-                            <div class='box'>
-                                <p><i style='color: #4CAF50' class='zmdi zmdi-account'></i> &nbsp; 2 Kings 12:89
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--<div class='nd2-card'>-->
+        <!--<div class='card-title'>-->
+        <!--<h3 class='card-primary-title' style='color: #4CAF50;'>David and Goliath</h3>-->
+        <!--&lt;!&ndash;//<h5>From " + +" to " + +"</h5>";&ndash;&gt;-->
+        <!--<div class='card-action'>-->
+        <!--<div class='row between-xs'>-->
+        <!--<div class='col-xs-12 align-left'>-->
+        <!--<div class='box'>-->
+        <!--<p><i style='color: #4CAF50' class='zmdi zmdi-account'></i> &nbsp; 2 Kings 12:89-->
+        <!--</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
     </div>
 </div>
 
@@ -844,6 +847,18 @@
 
 <!--messages page-->
 <div data-role="page" id="messagespage">
+    <div id="dialog" style="display: none" align = "center">
+        This is a jQuery Dialog.
+    </div>
+
+    <div data-role="popup" id="sermon_desc">
+        <div data-role="content" id="sermon_con">
+            <p>Are you sure you want to sign-out ?</p>
+            <!--<a data-role="button" onclick="" data-inline="true" class="ui-btn ui-btn-primary">OK</a>-->
+            <a data-rel="back" data-role="button" data-inline="true" class="ui-btn ui-btn-primary">OK</a>
+        </div>
+    </div>
+
     <!---->
     <div data-role="header" style="background-color: #4CAF50"
          class="wow fadeIn ui-header ui-bar-inherit ui-header-fixed slidedown" role="banner">
